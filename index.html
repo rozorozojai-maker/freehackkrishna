@@ -1,220 +1,264 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Hacks Krishna | Premium Mods & Hacks</title>
+    <title>Krishna Hacks</title>
     <style>
-        /* Matrix Base Setup */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Courier New', Courier, monospace;
         }
+
         body {
-            background-color: #000;
-            color: #0f0;
+            background-color: #0a0a0a;
+            color: #00ff00;
             overflow-x: hidden;
         }
-        
-        /* Background Matrix Falling Numbers Canvas */
-        #matrixCanvas {
+
+        /* Password Screen Styling */
+        #password-screen {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 1;
-            opacity: 0.35;
-        }
-
-        /* Main Content Container */
-        .content {
-            position: relative;
-            z-index: 10;
+            width: 100%;
+            height: 100%;
+            background-color: #050505;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
+            align-items: center;
+            z-index: 9999;
             text-align: center;
+            padding: 20px;
         }
 
-        /* Glitch Title Animation */
-        h1 {
-            font-size: 3rem;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
-            margin-bottom: 10px;
-            animation: pulse 2s infinite;
+        #password-screen h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00ff00;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); text-shadow: 0 0 10px #0f0; }
-            50% { transform: scale(1.02); text-shadow: 0 0 25px #0f0, 0 0 40px #00ff00; }
-            100% { transform: scale(1); text-shadow: 0 0 10px #0f0; }
-        }
-
-        .subtitle {
+        #password-input {
+            background: #111;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            padding: 10px 15px;
             font-size: 1.2rem;
-            color: #fff;
-            margin-bottom: 40px;
-            border-right: 2px solid #0f0;
-            white-space: nowrap;
-            overflow: hidden;
+            border-radius: 5px;
+            outline: none;
+            text-align: center;
+            margin-bottom: 15px;
             width: 100%;
-            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
-            max-width: 450px;
+            max-width: 300px;
         }
 
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #0f0; }
+        #password-submit {
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
         }
 
-        /* Mod/Hack Grid */
+        #password-submit:hover {
+            background: #00cc00;
+            box-shadow: 0 0 15px #00ff00;
+        }
+
+        #error-msg {
+            color: #ff0000;
+            margin-top: 15px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+
+        /* Main Content Styling */
+        #main-content {
+            display: none;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px dashed #00ff00;
+            padding-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 15px #00ff00;
+            margin-bottom: 10px;
+        }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            max-width: 900px;
-            width: 100%;
+            gap: 25px;
         }
 
-        /* Cards Style Like JollyMod */
         .card {
-            background: rgba(0, 20, 0, 0.6);
-            border: 1px solid #0f0;
+            background: #111;
+            border: 1px solid #00ff00;
             border-radius: 8px;
-            padding: 25px;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
-            transition: all 0.3s ease;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.3s;
         }
 
         .card:hover {
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
             transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(0, 255, 0, 0.6);
-            background: rgba(0, 40, 0, 0.8);
         }
 
         .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
             color: #fff;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
         }
 
         .card p {
+            font-size: 0.9rem;
             color: #888;
-            font-size: 0.95rem;
             margin-bottom: 20px;
+            line-height: 1.4;
         }
 
-        /* Download Button */
+        .card em {
+            color: #00ff00;
+            font-style: normal;
+            display: block;
+            margin-top: 5px;
+        }
+
         .btn {
             display: inline-block;
             background: transparent;
-            color: #0f0;
-            border: 1px solid #0f0;
-            padding: 10px 20px;
-            font-weight: bold;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 10px 15px;
+            text-align: center;
             text-decoration: none;
-            text-transform: uppercase;
+            font-weight: bold;
             border-radius: 4px;
-            cursor: pointer;
-            transition: 0.3s ease;
+            transition: 0.3s;
         }
 
         .btn:hover {
-            background: #0f0;
+            background: #00ff00;
             color: #000;
-            box-shadow: 0 0 15px #0f0;
         }
     </style>
 </head>
 <body>
 
-    <canvas id="matrixCanvas"></canvas>
+    <div id="password-screen">
+        <h1>[ ACCESS RESTRICTED ]</h1>
+        <p style="margin-bottom: 15px; color: #888;">Enter password to unlock Krishna Hacks</p>
+        <input type="password" id="password-input" placeholder="Enter Password">
+        <button id="password-submit" onclick="checkPassword()">UNLOCKED</button>
+        <div id="error-msg"></div>
+    </div>
 
-    <div class="content">
-        <h1>Free Hacks Krishna</h1>
-        <p class="subtitle">> SYSTEM STATUS: INJECTING MODS...</p>
+    <div id="main-content">
+        <header>
+            <h1>KRISHNA HACKS</h1>
+            <p>// Welcome to the Premium Hub // New mods added regularly</p>
+        </header>
 
-        <div class="grid">
-            
-            <div class="card">
-                <h3>Free Fire Premium Mod</h3>
-                <p>Auto Headshot, ESP Line, Location Hack, and VIP Skin Tool Injector. 100% Anti-Ban Config.</p>
-                <a href="#" class="btn">Download APK</a>
+        <main>
+            <div class="grid">
+                
+                <div class="card">
+                    <div>
+                        <h3>Ibis Paint X Premium</h3>
+                        <p>Get all premium features and brushes unlocked for your digital artwork.</p>
+                    </div>
+                    <a href="https://www.mediafire.com/file/afv9tz7oyyvkph3/ibisPaint_X_13.1.10_premium.apk/file" target="_blank" class="btn">Download APK</a>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>FlipaClip Premium</h3>
+                        <p>Create animations without any watermark and unlock all premium tools.</p>
+                    </div>
+                    <a href="https://www.mediafire.com/file/afv9tz7oyyvkph3/ibisPaint_X_13.1.10_premium.apk/file" target="_blank" class="btn">Download APK</a>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>MT Manager</h3>
+                        <p>The ultimate file manager and APK editor tool for advanced customization.</p>
+                    </div>
+                    <a href="https://www.mediafire.com/file/thnglusmrzemhuh/MT_Manager_2.26.4.apk/file" target="_blank" class="btn">Download APK</a>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Insta Fake Follow</h3>
+                        <p>TopFollow tool to boost and manage your profile easily. <em>*How to use: Search YT and check out</em></p>
+                    </div>
+                    <a href="https://www.mediafire.com/file/dwt1v2mzv55g4xh/TopFollow_5.5.7-R.apk/file" target="_blank" class="btn">Download APK</a>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>AI Model Veo 3.1</h3>
+                        <p>Unlimited video and image generation guaranteed free. <em>*How to use: Search YT and check out</em></p>
+                    </div>
+                    <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.producer" target="_blank" class="btn">Download Link</a>
+                </div>
+
             </div>
-
-            <div class="card">
-                <h3>Minecraft Mod Menu</h3>
-                <p>God Mode, Fly, X-Ray Vision, Speed Hack, and Unlimited Resource Spawner for Mobile.</p>
-                <a href="#" class="btn">Download APK</a>
-            </div>
-
-            <div class="card">
-                <h3>Little Big Snake Mod</h3>
-                <p>VIP Unlocked, God Mode, Speed Booster Hack, and Infinite Size/Coins Menu.</p>
-                <a href="#" class="btn">Download APK</a>
-            </div>
-
-        </div>
+        </main>
     </div>
 
     <script>
-        const canvas = document.getElementById('matrixCanvas');
-        const ctx = canvas.getContext('2d');
+        function checkPassword() {
+            var passwordInput = document.getElementById("password-input").value;
+            var errorMsg = document.getElementById("error-msg");
 
-        // Set Full Screen
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+            // Correct Password Check
+            if (passwordInput === "freehackkrishna") {
+                errorMsg.innerHTML = "";
+                
+                // Voice Line Play Feature
+                if ('speechSynthesis' in window) {
+                    var speech = new SpeechSynthesisUtterance();
+                    speech.text = "Welcome to the Krishna World";
+                    speech.lang = "en-US";
+                    speech.rate = 0.9; // Normal speed
+                    window.speechSynthesis.speak(speech);
+                }
 
-        // Numbers/Binary Style
-        const matrixChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        const alphabet = matrixChars.split("");
-
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-
-        const rainDrops = [];
-
-        for (let x = 0; x < columns; x++) {
-            rainDrops[x] = 1;
+                // Hide Password Screen and Show Main Site
+                document.getElementById("password-screen").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+            } else {
+                errorMsg.innerHTML = "❌ Incorrect Password! Try Again.";
+            }
         }
 
-        const draw = () => {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#0F0'; // Green text
-            ctx.font = fontSize + 'px monospace';
-
-            for (let i = 0; i < rainDrops.length; i++) {
-                const text = alphabet[Math.floor(Math.random() * alphabet.length)];
-                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-
-                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    rainDrops[i] = 0;
-                }
-                rainDrops[i]++;
+        // Allow entering password by pressing "Enter" key
+        document.getElementById("password-input").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                checkPassword();
             }
-        };
-
-        setInterval(draw, 30);
-
-        // Resize Canvas dynamically if screen moves
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
         });
     </script>
 </body>
 </html>
+
