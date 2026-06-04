@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krishna Hacks</title>
+    <title>KRISHNA HACKS | Premium Mods & Tools</title>
     <style>
+        /* Matrix Base Setup */
         * {
             margin: 0;
             padding: 0;
@@ -13,9 +14,22 @@
         }
 
         body {
-            background-color: #0a0a0a;
+            background-color: #000;
             color: #00ff00;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Matrix Canvas */
+        #matrixCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            opacity: 0.25;
+            pointer-events: none;
         }
 
         /* Password Screen Styling */
@@ -31,45 +45,49 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            text-align: center;
             padding: 20px;
+            text-align: center;
         }
 
         #password-screen h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
-            text-shadow: 0 0 10px #00ff00;
+            text-shadow: 0 0 15px #00ff00;
+            animation: pulse 2s infinite;
         }
 
         #password-input {
             background: #111;
             border: 2px solid #00ff00;
             color: #00ff00;
-            padding: 10px 15px;
+            padding: 12px 20px;
             font-size: 1.2rem;
             border-radius: 5px;
             outline: none;
             text-align: center;
             margin-bottom: 15px;
             width: 100%;
-            max-width: 300px;
+            max-width: 320px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
         }
 
         #password-submit {
             background: #00ff00;
             color: #000;
             border: none;
-            padding: 10px 25px;
+            padding: 12px 30px;
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             border-radius: 5px;
-            transition: 0.3s;
+            transition: 0.3s ease;
+            box-shadow: 0 0 15px #00ff00;
         }
 
         #password-submit:hover {
             background: #00cc00;
-            box-shadow: 0 0 15px #00ff00;
+            box-shadow: 0 0 25px #00ff00;
+            transform: scale(1.05);
         }
 
         #error-msg {
@@ -77,11 +95,14 @@
             margin-top: 15px;
             font-weight: bold;
             min-height: 20px;
+            text-shadow: 0 0 5px #ff0000;
         }
 
-        /* Main Content Styling */
+        /* Main Content Container */
         #main-content {
             display: none;
+            position: relative;
+            z-index: 2;
             padding: 20px;
             max-width: 1200px;
             margin: 0 auto;
@@ -95,31 +116,66 @@
         }
 
         header h1 {
-            font-size: 2.5rem;
-            text-shadow: 0 0 15px #00ff00;
+            font-size: 3rem;
+            text-shadow: 0 0 20px #00ff00;
             margin-bottom: 10px;
+            letter-spacing: 2px;
         }
 
+        /* Search Bar Setup */
+        .search-container {
+            margin: 20px auto 30px auto;
+            max-width: 500px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar {
+            width: 100%;
+            background: rgba(17, 17, 17, 0.8);
+            border: 2px solid #00ff00;
+            padding: 12px 45px 12px 20px;
+            color: #00ff00;
+            font-size: 1rem;
+            border-radius: 25px;
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 18px;
+            color: #00ff00;
+            font-weight: bold;
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+
+        /* Grid and Cards Layout */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
+            margin-bottom: 40px;
         }
 
         .card {
-            background: #111;
+            background: rgba(17, 17, 17, 0.85);
             border: 1px solid #00ff00;
             border-radius: 8px;
-            padding: 20px;
+            padding: 25px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
         }
 
         .card:hover {
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
             transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
+            background: rgba(25, 25, 25, 0.9);
         }
 
         .card h3 {
@@ -127,132 +183,327 @@
             margin-bottom: 10px;
             color: #fff;
             border-bottom: 1px solid #333;
-            padding-bottom: 5px;
+            padding-bottom: 8px;
+            text-shadow: 0 0 5px #00ff00;
         }
 
         .card p {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #888;
             margin-bottom: 20px;
-            line-height: 1.4;
-        }
-
-        .card em {
-            color: #00ff00;
-            font-style: normal;
-            display: block;
-            margin-top: 5px;
+            line-height: 1.5;
         }
 
         .btn {
             display: inline-block;
+            text-align: center;
             background: transparent;
             color: #00ff00;
             border: 1px solid #00ff00;
-            padding: 10px 15px;
-            text-align: center;
-            text-decoration: none;
+            padding: 10px 20px;
             font-weight: bold;
+            text-decoration: none;
+            text-transform: uppercase;
             border-radius: 4px;
             transition: 0.3s;
+            cursor: pointer;
         }
 
         .btn:hover {
             background: #00ff00;
             color: #000;
+            box-shadow: 0 0 15px #00ff00;
+        }
+
+        /* Trading Quotex Special Section */
+        .trading-section {
+            background: rgba(20, 10, 10, 0.9);
+            border: 2px solid #ff0000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            margin-top: 40px;
+        }
+
+        .trading-section h3 {
+            color: #ff3333 !important;
+            text-shadow: 0 0 10px #ff0000 !important;
+            border-bottom: 1px solid #ff0000 !important;
+        }
+
+        .trading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .qr-code {
+            width: 220px;
+            height: 220px;
+            border: 3px solid #00ff00;
+            margin: 15px 0;
+            padding: 5px;
+            background: #fff;
+            box-shadow: 0 0 15px #00ff00;
+        }
+
+        .instruction-text {
+            color: #fff;
+            font-weight: bold;
+            margin: 15px 0;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .dm-box {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .btn-trade {
+            border-color: #ff3333;
+            color: #ff3333;
+        }
+
+        .btn-trade:hover {
+            background: #ff3333;
+            color: #000;
+            box-shadow: 0 0 15px #ff0000;
+        }
+
+        /* Footer / Customer Support Styles */
+        footer {
+            margin-top: 60px;
+            border-top: 2px dashed #00ff00;
+            padding: 30px 20px;
+            text-align: center;
+            background: rgba(10, 10, 10, 0.9);
+        }
+
+        footer h2 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .support-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .support-link {
+            color: #00ff00;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border: 1px dotted #00ff00;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .support-link:hover {
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.03); opacity: 1; text-shadow: 0 0 25px #00ff00; }
+            100% { transform: scale(1); opacity: 0.9; }
+        }
+
+        /* Responsive Setup */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            #password-screen h1 { font-size: 1.8rem; }
+            .dm-box { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
+    <canvas id="matrixCanvas"></canvas>
+
     <div id="password-screen">
         <h1>[ ACCESS RESTRICTED ]</h1>
-        <p style="margin-bottom: 15px; color: #888;">Enter password to unlock Krishna Hacks</p>
+        <p style="color: #888; margin-bottom: 20px;">Enter security credentials to unlock Krishna Hacks.</p>
         <input type="password" id="password-input" placeholder="Enter Password">
-        <button id="password-submit" onclick="checkPassword()">UNLOCKED</button>
+        <button id="password-submit" onclick="checkPassword()">UNLOCK SYSTEM</button>
         <div id="error-msg"></div>
     </div>
 
     <div id="main-content">
         <header>
             <h1>KRISHNA HACKS</h1>
-            <p>// Welcome to the Premium Hub // New mods added regularly</p>
+            <p>Welcome to the Premium Hub // New mods added regularly</p>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" id="searchApps" onkeyup="filterApps()" placeholder="Search tools or premium mods...">
+                <span class="search-icon">🔍</span>
+            </div>
         </header>
 
         <main>
-            <div class="grid">
+            <div class="grid" id="appsGrid">
                 
-                <div class="card">
-                    <div>
-                        <h3>Ibis Paint X Premium</h3>
-                        <p>Get all premium features and brushes unlocked for your digital artwork.</p>
-                    </div>
-                    <a href="https://www.mediafire.com/file/afv9tz7oyyvkph3/ibisPaint_X_13.1.10_premium.apk/file" target="_blank" class="btn">Download APK</a>
+                <div class="card app-item">
+                    <h3>Ibis Paint X Premium</h3>
+                    <p>Get all premium features and brushes unlocked for your digital artwork. Fully patched premium version.</p>
+                    <a href="https://www.mediafire.com/file/afv9tz7oyvkph3/ibisPaint_X_13.1.10_premium.apk/file" target="_blank" class="btn">Download APK</a>
                 </div>
 
-                <div class="card">
-                    <div>
-                        <h3>FlipaClip Premium</h3>
-                        <p>Create animations without any watermark and unlock all premium tools.</p>
-                    </div>
-                    <a href="https://www.mediafire.com/file/afv9tz7oyyvkph3/ibisPaint_X_13.1.10_premium.apk/file" target="_blank" class="btn">Download APK</a>
+                <div class="card app-item">
+                    <h3>FlipaClip Premium</h3>
+                    <p>Create animations without any watermark and unlock all premium production tools natively.</p>
+                    <a href="https://www.mediafire.com/file/afv9tz7oyvkph3/ibisPaint_X_13.1.10_premium.apk/file" target="_blank" class="btn">Download APK</a>
                 </div>
 
-                <div class="card">
-                    <div>
-                        <h3>MT Manager</h3>
-                        <p>The ultimate file manager and APK editor tool for advanced customization.</p>
-                    </div>
+                <div class="card app-item">
+                    <h3>MT Manager</h3>
+                    <p>The ultimate file manager and APK editor tool for advanced customization, binary editing, and XML modding.</p>
                     <a href="https://www.mediafire.com/file/thnglusmrzemhuh/MT_Manager_2.26.4.apk/file" target="_blank" class="btn">Download APK</a>
                 </div>
 
-                <div class="card">
-                    <div>
-                        <h3>Insta Fake Follow</h3>
-                        <p>TopFollow tool to boost and manage your profile easily. <em>*How to use: Search YT and check out</em></p>
-                    </div>
-                    <a href="https://www.mediafire.com/file/dwt1v2mzv55g4xh/TopFollow_5.5.7-R.apk/file" target="_blank" class="btn">Download APK</a>
+                <div class="card app-item">
+                    <h3>Insta Fake Follow</h3>
+                    <p>TopFollow tool to boost your social platform reach easily. Gain authentic followers instantly.</p>
+                    <a href="https://www.mediafire.com/file/dwt1vzmz55g4xh/TopFollow_5.5.7-R.apk/file" target="_blank" class="btn">Download APK</a>
                 </div>
 
-                <div class="card">
-                    <div>
-                        <h3>AI Model Veo 3.1</h3>
-                        <p>Unlimited video and image generation guaranteed free. <em>*How to use: Search YT and check out</em></p>
-                    </div>
+                <div class="card app-item">
+                    <h3>AI Model Veo 3.1</h3>
+                    <p>Unlimited video and image generation features. Access Google's high-tier experimental AI model framework.</p>
                     <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.producer" target="_blank" class="btn">Download Link</a>
+                </div>
+
+                <div class="card app-item trading-section">
+                    <h3>Quotex Trading Trick [100% WIN]</h3>
+                    <p>Gimani Bhai Special Trading Hack Course! Secret algorithm strategies revealed for maximum win rate.</p>
+                    <div class="trading-container">
+                        <div class="qr-code" style="background-image: url('Screenshot_2026_0604_192145.png'); background-size: cover; background-position: center;"></div>
+                        <p class="instruction-text">
+                            ⚠️ PAYMENT INSTRUCTION:<br>
+                            QR Code par payment karne ke baad Transaction ID/UTR Number WhatsApp par send kar dein. Owner check karega aur sahi hone par WhatsApp par hi secret private YouTube link de dega!
+                        </p>
+                        <div class="dm-box">
+                            <a href="https://wa.me/918383923282" target="_blank" class="btn btn-trade">DM Number 1</a>
+                            <a href="https://wa.me/919376585113" target="_blank" class="btn btn-trade">DM Number 2</a>
+                        </div>
+                    </div>
                 </div>
 
             </div>
         </main>
+
+        <footer>
+            <h2>CUSTOMER SUPPORT CENTRAL</h2>
+            <p>Agar koi link work na kare ya koi feedback dena ho, toh niche options par directly click karein (Active 24/7):</p>
+            <div class="support-links">
+                <a href="mailto:krishnaaxwebservice@gmail.com" class="support-link">📧 Email Support</a>
+                <a href="https://wa.me/919376585113" target="_blank" class="support-link">💬 WhatsApp Help</a>
+            </div>
+        </footer>
     </div>
 
     <script>
-        function checkPassword() {
-            var passwordInput = document.getElementById("password-input").value;
-            var errorMsg = document.getElementById("error-msg");
+        // Matrix Falling Binary Animation Logic
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
 
-            // Correct Password Check
-            if (passwordInput === "freehackkrishna") {
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const matrixChars = "010101010101";
+        const alphabet = matrixChars.split("");
+        const fontSize = 16;
+        let columns = canvas.width / fontSize;
+        let rainDrops = [];
+
+        function initRain() {
+            columns = canvas.width / fontSize;
+            rainDrops = [];
+            for (let x = 0; x < columns; x++) {
+                rainDrops[x] = 1;
+            }
+        }
+        initRain();
+        window.addEventListener('resize', initRain);
+
+        const drawMatrix = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ff00';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet[Math.floor(Math.random() * alphabet.length)];
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+        setInterval(drawMatrix, 30);
+
+        // Password Unlock Core Logic
+        function checkPassword() {
+            const passwordInput = document.getElementById("password-input").value;
+            const errorMsg = document.getElementById("error-msg");
+
+            // New password configuration requested by user
+            if (passwordInput === "crash tool") {
                 errorMsg.innerHTML = "";
                 
-                // Voice Line Play Feature
+                // Voice Line Feature Implementation
                 if ('speechSynthesis' in window) {
                     var speech = new SpeechSynthesisUtterance();
                     speech.text = "Welcome to the Krishna World";
                     speech.lang = "en-US";
-                    speech.rate = 0.9; // Normal speed
+                    speech.rate = 0.9;
                     window.speechSynthesis.speak(speech);
                 }
 
-                // Hide Password Screen and Show Main Site
+                // Transition screens
                 document.getElementById("password-screen").style.display = "none";
                 document.getElementById("main-content").style.display = "block";
             } else {
-                errorMsg.innerHTML = "❌ Incorrect Password! Try Again.";
+                errorMsg.innerHTML = "❌ Incorrect Transaction ID or Password! Try Again.";
             }
         }
 
-        // Allow entering password by pressing "Enter" key
+        // Search Filter Logic
+        function filterApps() {
+            const input = document.getElementById('searchApps').value.toLowerCase();
+            const cards = document.getElementsByClassName('app-item');
+
+            for (let i = 0; i < cards.length; i++) {
+                const title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+                const desc = cards[i].getElementsByTagName('p')[0].innerText.toLowerCase();
+                
+                if (title.includes(input) || desc.includes(input)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // Allow 'Enter' key press to submit password
         document.getElementById("password-input").addEventListener("keyup", function(event) {
             if (event.key === "Enter") {
                 checkPassword();
@@ -261,4 +512,3 @@
     </script>
 </body>
 </html>
-
